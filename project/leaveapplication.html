@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Application</title>
+</head>
+<body>
+    <h1 class="m">LEAVE APPICATION FOR FACULTY / STAFF</h1>
+    <form class="m" action="leaveapplicationprocess.php" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="id">ID:</label><br>
+        <input type="text" id="id" name="id" required><br><br>
+
+        <label for="designation">Designation:</label><br>
+        <input type="text" id="designation" name="designation" required><br><br>
+
+        <label for="department">Department:</label><br>
+        <input type="text" id="department" name="department" required><br><br>
+
+        <label for="leave_type">Type of Leave:</label><br>
+        <select id="leave_type" name="leave_type" required>
+            <option value="sick">Sick Leave</option>
+            <option value="casual">Casual Leave</option>
+            <option value="earned">Earned Leave</option>
+            <option value="maternity">Maternity Leave</option>
+            <option value="paternity">Paternity Leave</option>
+        </select><br><br>
+
+        <label for="start_date">Start Date:</label><br>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+
+        <label for="end_date">End Date:</label><br>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+
+        <label for="reason">Reason for Leave:</label><br>
+        <textarea id="reason" name="reason" rows="4" cols="50" required></textarea><br><br>
+
+        <input type="submit" value="Submit">
+</body>
+</html>
