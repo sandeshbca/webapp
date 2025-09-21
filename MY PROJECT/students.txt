@@ -1,0 +1,5 @@
+Name : sks
+Account No : 12
+Total balance : 2000
+Debit amount : 1000
+Credit amount : 2000
