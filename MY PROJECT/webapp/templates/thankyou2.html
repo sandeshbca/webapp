@@ -1,0 +1,14 @@
+{% extends "feedback2.html" %}
+
+{% block title %} feedback form{% endblock %}
+
+{% block content %}
+<h2>Thank You </h2><br>
+<h3> {{email}} ({{name}}) </h3><br>
+<dl>
+    <dd>Your Feedback</dd>
+    <dt>{{massage}} </dt>
+</dl>
+<a href="/feedback" class="btn" class="line">feedback form</a>
+
+{% endblock %}

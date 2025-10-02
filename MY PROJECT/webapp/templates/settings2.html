@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:#066b78;
+      --secondary:#007b83;
+      --light:#f9f9f9;
+      --dark:#333;
+      --muted:#888;
+      --card-bg:#fff;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Roboto",sans-serif;}
+    body{display:flex;min-height:100vh;background:var(--light);}
+    
+    /* Sidebar */
+    .sidebar{
+      width:240px;background:var(--primary);color:#fff;
+      display:flex;flex-direction:column;padding:20px 0;
+    }
+    .sidebar h2{ text-align:center;margin-bottom:30px;}
+    .sidebar a{
+      display:block;padding:11px 24px;color:#fff;text-decoration:none;
+      transition:background .2s;font-weight:500;
+    }
+    .sidebar a:hover{ background:rgba(255,255,255,0.15);}
+    /* .sidebar a.active{ background:rgba(58, 2, 2, 0.25);} */
+
+    /* Main */
+    .main{ flex:1;display:flex;flex-direction:column;}
+
+    /* Topbar */
+    .topbar{
+      height:60px;background:#fff;display:flex;align-items:center;
+      justify-content:space-between;padding:0 20px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    }
+    .user{display:flex;align-items:center;gap:10px;cursor:pointer;}
+    .user img{width:38px;height:38px;border-radius:50%;}
+
+    /* Content */
+    .content{padding:20px;}
+    .card{
+      background:var(--card-bg);padding:20px;border-radius:10px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.06);
+      max-width:700px;margin:auto;
+    }
+    .card h2{margin-bottom:20px;color:var(--dark);}
+    .form-row{margin-bottom:18px;}
+    label{display:block;margin-bottom:8px;font-weight:500;color:var(--dark);}
+    input,select{
+      width:100%;padding:14px;border:1px solid #ddd;border-radius:6px;
+      font-size:15px;outline:none;transition:border .2s;
+    }
+    input:focus{border-color:var(--secondary);}
+    .btn{
+      background:var(--secondary);color:#fff;padding:14px 20px;
+      border:none;border-radius:6px;font-weight:600;cursor:pointer;
+    }
+    .btn:active{transform:translateY(1px);}
+
+    /* Profile pic section */
+    .profile-pic-container{
+      display:flex;align-items:center;gap:20px;
+    }
+    .profile-pic-container img{
+      width:80px;height:80px;border-radius:50%;
+      object-fit:cover;border:2px solid var(--secondary);
+    }
+    .space{
+      margin-top: 555px;
+    }
+  </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>MyApp</h2>
+        <a href="{{url_for('dashboard')}}">🏠 Dashboard</a>
+        <a href=" {{url_for('analytics')}} ">📊 Analytics</a>
+        <a href="{{url_for('tasks')}}">📝 Tasks</a>
+        <a href="{{url_for('notification')}}">🔔 Notifications</a>
+        <a href="{{url_for('settings')}}" class="active">⚙️ Settings</a>
+        <a href=" {{url_for('feedback')}} ">🤗 Feedback</a>
+        <a href="{{url_for('login')}}" class="space">🚪 Logout</a>
+    </div>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <h1>Settings</h1>
+      <div class="user">
+        <img src="https://i.pravatar.cc/100" alt="user">
+        <span>Sandesh</span>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <h2>Account Settings</h2>
+        <form id="settingsForm" onsubmit="saveSettings(event)">
+          
+          <!-- Profile picture -->
+          <div class="form-row">
+            <label>Profile Picture</label>
+            <div class="profile-pic-container">
+              <img id="profilePreview" src="https://i.pravatar.cc/100" alt="Profile">
+              <input type="file" id="profilePic" accept="image/*">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" value="Sandesh Kumar">
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" value="sandesh@example.com">
+          </div>
+          <div class="form-row">
+            <label for="password">New Password</label>
+            <input type="password" id="password" placeholder="Enter new password">
+          </div>
+          <div class="form-row">
+            <label for="theme">Theme</label>
+            <select id="theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+          <button class="btn" type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Profile pic preview
+    const profileInput = document.getElementById("profilePic");
+    const profilePreview = document.getElementById("profilePreview");
+
+    profileInput.addEventListener("change", () => {
+      const file = profileInput.files[0];
+      if(file){
+        const reader = new FileReader();
+        reader.onload = e => profilePreview.src = e.target.result;
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Save settings demo
+    function saveSettings(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const theme = document.getElementById('theme').value;
+      alert("Settings saved!\nName: " + name + "\nEmail: " + email + "\nTheme: " + theme);
+    }
+  </script>
+</body>
+</html>
